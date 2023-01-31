@@ -68,7 +68,16 @@ function Chatbot() {
     <div className="chatbot">
       <Header />
       <Messages messages={messages} isLoading={loader} />
-      {lastMsg?.next !== null && <Input onSend={send} />}
+      {lastMsg?.next !== null && <>
+        {
+          lastMsg?.type === "text" && <Input onSend={send} />
+        }
+        {
+          lastMsg?.type === "option" && <div class="btn-group">
+            {lastMsg.answer.map(itm => <button onSend={() => send(itm.value)}>{itm.label}</button>)}
+          </div>
+        }
+      </>}
     </div>
   );
 }
