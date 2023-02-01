@@ -10,7 +10,7 @@ import API from "./api/ChatbotAPI";
 
 import "./styles.css";
 import Header from "./components/Header";
-import { getQuestionByUser } from "./api";
+import { addChatBotResponse, getQuestionByUser } from "./api";
 
 function Chatbot() {
   const [messages, setMessages] = useState([]);
@@ -52,6 +52,10 @@ function Chatbot() {
 
   const send = async text => {
     const last = messages[messages.length - 1];;
+    await addChatBotResponse({
+      question: last.id,
+      response: text
+    });
     let newMessages = messages;
     newMessages.push({
       from: "user",
@@ -74,7 +78,7 @@ function Chatbot() {
         }
         {
           lastMsg?.type === "option" && <div class="btn-group">
-            {lastMsg.answer.map(itm => <button onSend={() => send(itm.value)}>{itm.label}</button>)}
+            {lastMsg.answer.map(itm => <button onClick={() => send(itm.value)}>{itm.label}</button>)}
           </div>
         }
       </>}
