@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function Input({ onSend }) {
+export default function Input({ onSend, type="text" }) {
   const [text, setText] = useState("");
 
   const handleInputChange = e => {
@@ -17,7 +17,7 @@ export default function Input({ onSend }) {
     <div className="input">
       <form onSubmit={handleSend}>
         <input
-          type="text"
+          type={type}
           onChange={handleInputChange}
           value={text}
           placeholder="Enter your message here"

@@ -35,7 +35,7 @@ function Chatbot() {
           from: "bot",
           lebel : <BotMessage
             key="087978"
-            text={"Thanks for using chat bot"}
+            text={{content: "Thanks for using chat bot", type: "text"}}
           />})
         setMessages(newMessages);
         console.log("No Data available");
@@ -74,7 +74,7 @@ function Chatbot() {
       <Messages messages={messages} isLoading={loader} />
       {lastMsg?.next !== null && <>
         {
-          lastMsg?.type === "text" && <Input onSend={send} />
+          (lastMsg?.type === "text" || lastMsg?.type === "date" || lastMsg?.type === "time" )  && <Input type={lastMsg?.type} onSend={send} />
         }
         {
           lastMsg?.type === "option" && <div class="btn-group">
